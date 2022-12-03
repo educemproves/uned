@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<hr>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<div class="card">
+				<div class="row no-gutters">
+					<div class="col-12">
+						<div class="card-header" align="center">
+							<h1>Ejercicio 5 - CSS</h3>
+						</div>
+						<div class="card-body ejercicio5">
+							<h5 class="card-title" align="center">Replica el siguiente objeto HTML a partir de:</h5>
+							<h5 class="card-title" align="center">Indicar las propiedades y valores CSS adecuados</h5>
+							<h5 class="card-title" align="center">Las propiedades WIDTH y MARGIN quedan excluidas</h5>
+							<div class="col-4 offset-4" style="background: black; text-align: center; color: white; padding: 10px;">Objeto a Copiar</div>
+							<div class="col-12" id="respuesta">
+								<div class="col-4 offset-4" id="objetoCopia"></div>
+							</div>	
+							<form class="form-group">
+								<label>Propiedad 1 y Valor 1:</label>
+								<input type="text" id="ejercicio51" name="ejercicio51" class="form-control" />
+								<input type="text" id="ejercicio52" name="ejercicio52" class="form-control" />
+								<label>Propiedad 2 y Valor 2:</label>
+								<input type="text" id="ejercicio53" name="ejercicio53" class="form-control" />
+								<input type="text" id="ejercicio54" name="ejercicio54" class="form-control" />
+								<label>Propiedad 3 y Valor 3:</label>
+								<input type="text" id="ejercicio55" name="ejercicio55" class="form-control" />
+								<input type="text" id="ejercicio56" name="ejercicio56" class="form-control" />
+								<label>Propiedad 4 y Valor 4:</label>
+								<input type="text" id="ejercicio57" name="ejercicio57" class="form-control" />
+								<input type="text" id="ejercicio58" name="ejercicio58" class="form-control" />
+								<br>
+								<a href="#" class="btn btn-primary" onclick="validaFormulario()">Enviar Respuesta</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+//Función validaFormulario() al clicar se comprueban los datos introducidos.
+function validaFormulario() {
+	//1. Crear una cadena con los errores del formulario
+	//2. Almacenamos las respuestas (propiedad,valor) en un vector.
+	let errores = "";
+	let respuestas = [];
+	for (let i=1; i<=8; i++) {
+		respuestas.push(document.querySelector('#ejercicio5'+i).value);
+	}
+	//3. Comprobamos si las respuestas son correctas.
+	document.querySelector('#respuesta').innerHTML = 'Tu Respuesta:\n' + document.querySelector('#respuesta').innerHTML;
+	document.querySelector('#objetoCopia').innerHTML = "Objeto a Copiar";
+	for (let i=0; i<8; i+=2) {
+		document.querySelector('#objetoCopia').style[respuestas[i]] = respuestas[i+1]; 
+		switch (respuestas[i]) {
+			case 'background':
+				if (respuestas[i+1] !== 'black') {
+					errores += "Propiedad correcta (background) valor incorrecto\n";
+				}
+				break;
+			case 'color':
+			if (respuestas[i+1] !== 'white') {
+					errores += "Propiedad correcta (color), valor incorrecto\n";
+				}
+				break;
+			case 'padding':
+				if (respuestas[i+1] !== '10px') {
+					errores += "Propiedad correcta (padding), valor incorrecto\n";
+				}
+				break;
+			case 'text-align':
+				if (respuestas[i+1] !== 'center') {
+					errores += "Propiedad correcta (text-align), valor incorrecto\n";
+				}
+				break;
+			default:
+			errores += "Propiedad "+ ((i/2)+1) +" y Valor " + ((i/2)+1) + "incorrectos\n";
+				break;
+		}
+	}
+	//5.Permitimos al usuario acceder al siguiente nivel o le indicamos que vuelva a intentarlo.
+	if (document.querySelector('#ejercicio6') == null) {	
+		if (errores.length == 0) {
+			document.querySelector('.ejercicio5').innerHTML = '<a href="./ejercicio6.html" id="ejercicio6" class="btn btn-success">Accede al Ejercicio 6</a>' + document.querySelector('.ejercicio5').innerHTML;
+			document.querySelector('.ejercicio5').innerHTML = "<h5 class='alert alert-primary'>¡La respuesta es correcta! Eres un mago, 50 puntos pa ti</h5>" + document.querySelector('.ejercicio5').innerHTML;
+			
+		} else {
+			alert(errores);
+		}
+	}
+}
+</script>
+</body>
+</html>

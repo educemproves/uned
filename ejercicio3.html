@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<hr>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<div class="card">
+				<div class="row no-gutters">
+					<div class="col-12">
+						<div class="card-header" align="center">
+							<h1>Ejercicio 3 - HTML</h3>
+						</div>
+						<div class="card-body ejercicio3">
+							<h5 class="card-title" align="center">Genera una tabla con etiquetas simples TR y TD</h5>
+							<h5 class="card-title" align="center">La tabla debe contener 2 filas y 3 columnas</h5>
+							<h5 class="card-title" align="center">Cada celda debe contener un número del (1 la 6)</h5>
+							<div id="respuestaTabla"></div>
+							<form class="form-group">
+								<label>Escribe la respuesta</label>
+								<textarea cols="30" rows="10" id="ejercicio3" name="ejercicio3" value="" class="form-control" ></textarea>
+								<br>
+								<a href="#" class="btn btn-primary" onclick="validaFormulario()">Enviar Respuesta</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+//Función validaFormulario() al clicar se comprueban los datos introducidos.
+function validaFormulario() {
+	//1. Crear una cadena con los errores del formulario
+	//2. La estructura básica HTML5 se debe introducir sin contenido.
+	let errores = "";
+	let respuesta = document.querySelector('#ejercicio3').value;
+	//3. Eliminamos los posibles saltos de linea introducidos por el alumno.
+	respuesta = respuesta.replace(/\n/g, '');
+	//4. Comprobamos si la respuesta es correcta.
+	let respuestaCorrecta = "<table><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>";
+	if (respuesta != respuestaCorrecta) {
+		errores += "La respuesta introducida no es correcta.\nVuelve a intentarlo :)";
+	}
+	respuesta = respuesta.replace(/table/, 'table class="table table-bordered"');
+	document.querySelector('#respuestaTabla').innerHTML = "Tu respuesta:\n"+respuesta;
+	//5.Permitimos al usuario acceder al siguiente nivel o le indicamos que vuelva a intentarlo.
+	if (document.querySelector('#ejercicio4') == null) {	
+		if (errores.length == 0) {
+			document.querySelector('.ejercicio3').innerHTML = '<a href="./ejercicio4.html" id="ejercicio4" class="btn btn-success">Accede al Ejercicio 4</a>' + document.querySelector('.ejercicio3').innerHTML;
+			document.querySelector('.ejercicio3').innerHTML = "<h5 class='alert alert-primary'>¡La respuesta es correcta! Increíble ya dispones de 30 puntazos</h5>" + document.querySelector('.ejercicio3').innerHTML;
+			
+		} else {
+			alert(errores);
+		}
+	}
+}
+</script>
+</body>
+</html>

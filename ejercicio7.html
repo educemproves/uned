@@ -1,0 +1,102 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<hr>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<div class="card">
+				<div class="row no-gutters">
+					<div class="col-12">
+						<div class="card-header" align="center">
+							<h1>Ejercicio 7 - CSS</h3>
+						</div>
+						<div class="card-body ejercicio7">
+							<h5 class="card-title" align="center">Replica las siguiente transiciones CSS (También debes acertar el diseño CSS)</h5>
+							<h5 class="card-title" align="center">Utiliza el formato del ejercicio anterior class='btn btn-primary col-2'</h5>
+							<h5 class="card-title" align="center">Con offset-X se separan elementos, class='btn btn-success col-3 offset-2'</h5>
+							<br>
+							<div class="row ej7">
+								<div class="btn btn-primary col-4 offset-1">Elemento 1</div>
+								<div class="btn btn-dark col-4 offset-2">Elemento 2</div>
+								<div class="col-12" id="respuesta" style="padding:0;">
+									<div id="transicionesCopia"></div>
+								</div>
+							</div>
+							<style>
+								.ej7 > div {
+									transition: transform 2s;
+								}
+							
+								.ej7 > div:nth-child(1):hover {
+									transform: rotate(360deg);
+								}
+								.ej7 > div:nth-child(2):hover {
+									transform: scale(1,2);
+								}
+								#transicionesCopia div {
+									transition: transform 2s;
+								}
+							</style>
+							<br>
+							<form class="form-group">
+								<label>Primer Elemento HTML:</label>
+								<input type="text" id="ejercicio71" name="ejercicio71" class="form-control" />
+								<label>CSS de la transición Primer Elemento:</label>
+								<input type="text" id="ejercicio72" name="ejercicio72" class="form-control" />
+								<label>Segundo Elemento HTML:</label>
+								<input type="text" id="ejercicio73" name="ejercicio73" class="form-control" />
+								<label>CSS de la transición Segundo Elemento:</label>
+								<input type="text" id="ejercicio74" name="ejercicio74" class="form-control" />
+								<br><a href="#" class="btn btn-primary" onclick="validaFormulario()">Enviar Respuesta</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+//Función validaFormulario() al clicar se comprueban los datos introducidos.
+function validaFormulario() {
+	//1. Crear una cadena con los errores del formulario
+	//2. Almacenamos las respuestas en un vector.
+	let errores = "";
+	let respuestas = [];
+	//3. Modificamos las comillas simples por dobles
+	for (let i=1; i<=4; i++) {
+		respuestas.push(document.querySelector('#ejercicio7'+i).value);
+		respuestas[i-1] = respuestas[i-1].replace(/'/g, '"');
+	}
+	//4. Comprobamos si las respuestas son correctas.
+	let respuestasCorrectas = [];
+	respuestasCorrectas.push('<div class="btn btn-primary col-4 offset-1">Elemento 1</div>');
+	respuestasCorrectas.push('transform: rotate(360deg);');
+	respuestasCorrectas.push('<div class="btn btn-dark col-4 offset-2">Elemento 2</div>');
+	respuestasCorrectas.push('transform: scale(1,2);');
+	for (let i=0; i<4; i++) {
+		if (respuestas[i] !== respuestasCorrectas[i]) {
+			errores += "Errores en la Respuesta " + (i+1) +"\n";
+		}
+	}
+	//5.Permitimos al usuario acceder al siguiente nivel o le indicamos que vuelva a intentarlo.
+	if (document.querySelector('#ejercicio8') == null) {	
+		if (errores.length == 0) {
+			document.querySelector('.ejercicio7').innerHTML = '<a href="./ejercicio8.html" id="ejercicio8" class="btn btn-success">Accede al Ejercicio 8</a>' + document.querySelector('.ejercicio7').innerHTML;
+			document.querySelector('.ejercicio7').innerHTML = "<h5 class='alert alert-primary'>¡La respuesta es correcta! Te lo mereces, llevas ganados 80 puntos</h5>" + document.querySelector('.ejercicio7').innerHTML;
+			
+		} else {
+			alert(errores);
+		}
+	}
+}
+</script>
+</body>
+</html>

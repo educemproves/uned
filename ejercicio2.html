@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<hr>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<div class="card">
+				<div class="row no-gutters">
+					<div class="col-12">
+						<div class="card-header" align="center">
+							<h1>Ejercicio 2 - HTML</h3>
+						</div>
+						<div class="card-body ejercicio2">
+							<h5 class="card-title" align="center">1. Programa un menú de navegación con 3 enlaces</h5>
+							<h5 class="card-title" align="center">2. Programa un main con 2 secciones y 1 articulo</h5>
+							<form class="form-group">
+								<label>Escribe la respuesta del ejercicio 1</label>
+								<p>Todos los enlaces (a) deben redirigir a https://uned.es y deben llamarse UNED</p>
+								<textarea cols="20" rows="10" id="ejercicio2a" name="ejercicio2a" value="" class="form-control" ></textarea>
+								<br>
+								<label>Escribe la respuesta del ejercicio 2</label>
+								<textarea cols="20" rows="10" id="ejercicio2b" name="ejercicio2a" value="" class="form-control" ></textarea>
+								<br>
+								<a href="#" id="botonForm" class="btn btn-primary" onclick="validaFormulario()">Enviar Respuesta</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+//Función validaFormulario() al clicar se comprueban los datos introducidos.
+function validaFormulario() {
+	//1. Crear un vector con los errores del formulario (en el caso de contorlar varios)
+	//2. Obtenemos las 2 respuestas que dispone el ejercicio.
+	let errores = "";
+	let respuesta1 = document.querySelector('#ejercicio2a').value;
+	let respuesta2 = document.querySelector('#ejercicio2b').value;
+	//3. Eliminamos los posibles saltos de linea introducidos por el alumno.
+	respuesta1 = respuesta1.replace(/\n/g, '');
+	respuesta2 = respuesta2.replace(/\n/g, '');
+	//4. Modificamos las posibles comillas dobles por comillas simples (respuesta1)
+	respuesta1 = respuesta1.replace(/"/g, "'");
+	//5. Comprobamos si la respuesta 1 es correcta.
+	let respuestaCorrecta1 = "<nav><a href='https://uned.es'>UNED</a><a href='https://uned.es'>UNED</a><a href='https://uned.es'>UNED</a></nav>";
+	if (respuesta1 !== respuestaCorrecta1) {
+		errores += "La respuesta 1 no es correcta.\n";
+	}
+	//6.Comprobamos si la respuesta 2 es correcta.
+	let respuestaCorrecta2 = "<main><section></section><section></section><article></article></main>";
+	if (respuesta2 !== respuestaCorrecta2) {
+		errores += "La respuesta 2 no es correcta.\n";
+	}
+	//7.Permitimos al usuario acceder al siguiente nivel o le indicamos que vuelva a intentarlo.
+	if (document.querySelector('#ejercicio3') == null) {
+		if (errores.length == 0) {
+			document.querySelector('.ejercicio2').innerHTML = '<a href="./ejercicio3.html" id="ejercicio3" class="btn btn-success">Accede al Ejercicio 3</a>' + document.querySelector('.ejercicio2').innerHTML;
+			document.querySelector('.ejercicio2').innerHTML = "<h5 class='alert alert-primary'>¡La respuesta es correcta! Actualmente dispones de 20 puntos</h5>" + document.querySelector('.ejercicio2').innerHTML;
+		} else {
+			//errores = errores.replace(/,/g, '\n'); 
+			alert(errores+"Vuelve a intentarlo :)");
+		}
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<hr>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<div class="card">
+				<div class="row no-gutters">
+					<div class="col-12">
+						<div class="card-header" align="center">
+							<h1>Ejercicio 8 Final - CSS</h3>
+						</div>
+						<div class="card-body ejercicio8">
+							<h5 class="card-title" align="center">Replica la siguiente animación CSS </h5>
+							<h5 class="card-title" align="center">Únicamente debes documentar el @keyframes</h5>
+							<br>
+							<div class="row">
+								<div id="anima" class="btn btn-warning col-6 offset-3">Elemento</div>
+								<style>
+									#anima {
+										color: white;
+										animation-name: barraProgreso;
+										animation-duration: 5s;
+										animation-iteration-count: 10;
+									}
+
+									@keyframes barraProgreso {
+										0% {background: red;}
+										25% {background: green;}
+										50% {background: blue;}
+										75% {background: brown;}
+										100% {background: red;}
+									}
+								</style>
+							</div>
+							<br>
+							<form class="form-group">
+								<label>Escribe la respuesta</label>
+								<textarea cols="30" rows="10" id="ejercicio8" name="ejercicio8" value="" class="form-control" ></textarea>
+								<br>
+								<a href="#" class="btn btn-primary" onclick="validaFormulario()">Enviar Respuesta</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+//Función validaFormulario() al clicar se comprueban los datos introducidos.
+function validaFormulario() {
+	//1. Crear una cadena con los errores del formulario
+	//2. Almacenamos las respuestas en un vector.
+	//3. Modificamos las comillas simples por dobles, saltos de linea y tabulaciones
+	let errores = "";
+	let respuesta = "";
+	respuesta = document.querySelector('#ejercicio8').value;
+	respuesta = respuesta.replace(/'/g, '"');
+	respuesta = respuesta.replace(/\n/g, '');
+	respuesta = respuesta.replace(/\t/g, '');
+	//4. Comprobamos si las respuestas son correctas.
+	let respuestaCorrecta = "@keyframes barraProgreso {0% {background: red;}25% {background: green;}50% {background: blue;}75% {background: brown;}100% {background: red;}}";
+	if (respuesta !== respuestaCorrecta) {
+		errores += "Errores en la Respuesta, ¡inténtalo de nuevo!\n";
+	}
+	//5.Permitimos al usuario acceder al siguiente nivel o le indicamos que vuelva a intentarlo.
+	if (document.querySelector('#ejercicio9') == null) {	
+		if (errores.length == 0) {
+			document.querySelector('.ejercicio8').innerHTML = "<h5 id='ejercicio9' class='alert alert-primary'>¡La respuesta es correcta! Insuperable 100 puntazos :)</h5>" + document.querySelector('.ejercicio8').innerHTML;
+			
+		} else {
+			alert(errores);
+		}
+	}
+}
+</script>
+</body>
+</html>

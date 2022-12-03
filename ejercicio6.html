@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<hr>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<div class="card">
+				<div class="row no-gutters">
+					<div class="col-12">
+						<div class="card-header" align="center">
+							<h1>Ejercicio 6 - CSS</h3>
+						</div>
+						<div class="card-body ejercicio6">
+							<h5 class="card-title" align="center">Replica la siguiente cuadrícula (Debes indicar las columnas y colores)</h5>
+							<h5 class="card-title" align="center">Los colores son: info, primary, secondary, dark, success, warning, danger</h5>
+							<h5 class="card-title" align="center">Ejemplo Formato Obligatorio: class='btn btn-primary col-2'</h5>
+							<div class="row">
+								<div class="btn btn-primary col-2">Elemento 1</div>
+								<div class="btn btn-success col-5">Elemento 2</div>
+								<div class="btn btn-warning col-5">Elemento 3</div>
+							</div>
+							<div class="row">
+								<div class="btn btn-secondary col-6">Elemento 1</div>
+								<div class="btn btn-dark col-6">Elemento 2</div>
+							</div>
+							<div class="row">
+								<div class="btn btn-danger col-3">Elemento 1</div>
+								<div class="btn btn-info col-4">Elemento 2</div>
+								<div class="btn btn-danger col-2">Elemento 3</div>
+								<div class="btn btn-success col-3">Elemento 4</div>
+							</div>
+							<div class="col-12" id="respuesta">
+								<div id="cuadriculaCopia"></div>
+							</div>	
+							<form class="form-group">
+								<label>Primera Hilera:</label>
+								<textarea id="ejercicio61" name="ejercicio63" cols="30" rows="5" class="form-control"></textarea>
+								<label>Segunda Hilera:</label>
+								<textarea id="ejercicio62" name="ejercicio63" cols="30" rows="5" class="form-control"></textarea>
+								<label>Tercera Hilera:</label>
+								<textarea id="ejercicio63" name="ejercicio63" cols="30" rows="5" class="form-control"></textarea>
+								<br>
+								<a href="#" class="btn btn-primary" onclick="validaFormulario()">Enviar Respuesta</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+//Función validaFormulario() al clicar se comprueban los datos introducidos.
+function validaFormulario() {
+	//1. Crear una cadena con los errores del formulario
+	//2. Almacenamos las respuestas en un vector.
+	let errores = "";
+	let respuestas = [];
+	//3. Eliminamos los posibles saltos de linea, tabulaciones y modificamos las comillas
+	document.querySelector('#respuesta').innerHTML = "<div id='cuadriculaCopia'></div>";
+	for (let i=1; i<=3; i++) {
+		respuestas.push(document.querySelector('#ejercicio6'+i).value);
+		respuestas[i-1] = respuestas[i-1].replace(/\n/g, '');
+		respuestas[i-1] = respuestas[i-1].replace(/\t/g, '')
+		respuestas[i-1] = respuestas[i-1].replace(/'/g, '"');
+		document.querySelector('#cuadriculaCopia').innerHTML += "<div class='row'>" + respuestas[i-1] + "</div>";
+	}
+	document.querySelector('#respuesta').innerHTML = 'Tu Respuesta:\n' + document.querySelector('#respuesta').innerHTML;
+	//4. Comprobamos si las respuestas son correctas.
+	let respuestasCorrectas = [];
+	respuestasCorrectas.push('<div class="btn btn-primary col-2">Elemento 1</div><div class="btn btn-success col-5">Elemento 2</div><div class="btn btn-warning col-5">Elemento 3</div>');
+	respuestasCorrectas.push('<div class="btn btn-secondary col-6">Elemento 1</div><div class="btn btn-dark col-6">Elemento 2</div>');
+	respuestasCorrectas.push('<div class="btn btn-danger col-3">Elemento 1</div><div class="btn btn-info col-4">Elemento 2</div><div class="btn btn-danger col-2">Elemento 3</div><div class="btn btn-success col-3">Elemento 4</div>');
+	for (let i=0; i<3; i++) {
+		if (respuestas[i] !== respuestasCorrectas[i]) {
+			errores += "Errores en la Hilera " + (i+1) +"\n";
+		}
+	}
+	//5.Permitimos al usuario acceder al siguiente nivel o le indicamos que vuelva a intentarlo.
+	if (document.querySelector('#ejercicio7') == null) {	
+		if (errores.length == 0) {
+			document.querySelector('.ejercicio6').innerHTML = '<a href="./ejercicio7.html" id="ejercicio7" class="btn btn-success">Accede al Ejercicio 7</a>' + document.querySelector('.ejercicio6').innerHTML;
+			document.querySelector('.ejercicio6').innerHTML = "<h5 class='alert alert-primary'>¡La respuesta es correcta! Alucinante, 60 puntos ya son tuyos</h5>" + document.querySelector('.ejercicio6').innerHTML;
+			
+		} else {
+			alert(errores);
+		}
+	}
+}
+</script>
+</body>
+</html>
